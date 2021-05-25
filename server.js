@@ -24,6 +24,15 @@ var icecreams = [
 
 
 
+app.get('/icecreams', (req, res) => {
+
+
+    res.render('icecreams', {
+        allCreams: icecreams
+    })
+    
+})
+
 app.get('/icecream/:name', (req, res) => {
 
     let iceCream = req.params.name
