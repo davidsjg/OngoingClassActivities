@@ -17,4 +17,4 @@ CREATE TABLE wishes (
 -- Insert a set of records.
 INSERT INTO wishes (wish) VALUES ('Be a star!');
 INSERT INTO wishes (wish) VALUES ('Have money!');
-INSERT INTO wishes (wish) VALUES ('Live forever!');
+INSERT INTO wishes (wish) VALUES ('Live forever!!');
