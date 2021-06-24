@@ -34,3 +34,28 @@ const connection = mysql.createConnection({
 
 
   //ROUTES 
+  app.get('/', (req, res) => {
+      connection.query(
+          'SELECT * FROM movies;', (err, data) => {
+              if (err) {
+                  return res.status(500).end()
+              }
+              
+              res.render('index', {movies: data})
+          }
+      )
+  })
+
+
+
+
+
+
+
+
+
+  // Start our server so that it can begin listening to client requests.
+// Log (server-side) when our server has started
+app.listen(PORT, () =>
+console.log(`Server listening on: http://localhost:${PORT}`)
+);

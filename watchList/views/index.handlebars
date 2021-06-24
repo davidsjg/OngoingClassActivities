@@ -1,0 +1,13 @@
+<h1>Movies to Watch</h1>
+
+
+<ul>
+    {{#each movies}}
+    <li>
+        <p>
+            {{id}}. {{movie}}
+            <button data-movieID="{{id}}" class="delMovie">Delete</button>
+        </p>
+    </li>
+    {{/each}}
+</ul>
