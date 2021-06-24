@@ -1,10 +1,10 @@
--- Drops the moviePlanner\_db if it already exists --
-DROP DATABASE IF EXISTS moviePlanner_db;
+-- Drops the movie_planner_db if it already exists --
+DROP DATABASE IF EXISTS movie_planner_db;
 
--- Create the database moviePlanner\_db and specified it for use.
-CREATE DATABASE moviePlanner_db;
+-- Create the database movie_planner_db and specified it for use.
+CREATE DATABASE movie_planner_db;
 
-USE moviePlanner_db;
+USE movie_planner_db;
 
 -- Create the table plans.
 CREATE TABLE movies (
@@ -14,4 +14,7 @@ CREATE TABLE movies (
 );
 
 -- Insert a set of records.
-INSERT INTO movies (movie) VALUES ('Better Off Dead);
+INSERT INTO movies (movie) VALUES ('Major League');
+INSERT INTO movies (movie) VALUES ('Dances With Wolves');
+INSERT INTO movies (movie) VALUES ('Goon');
+INSERT INTO movies (movie) VALUES ('Fast Times');

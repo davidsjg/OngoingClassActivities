@@ -1,19 +1,21 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const mysql = require('mysql');
-const path = require('path');
 
 const app = express();
 
+//set the port of our application - process.env.port is for heroku
 const PORT = process.env.PORT || 8080;
 
+// Middleware setting up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//establishing handlebars homescreen layout default
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.use(express.static(path.join(__dirname, '/')));
 app.set('view engine', 'handlebars');
 
+//setting up connection with MySQL, establishing what database to use 
 const connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -30,35 +32,5 @@ const connection = mysql.createConnection({
     console.log(`connected as id ${connection.threadId}`);
   });
 
-  app.get('/', (req, res) => {
-      connection.query('SELECT * FROM movies;', (err, data) => {
-          if (err) {
-              return res.status(500).end()
-          }
 
-          res.render('index', {movies: data})
-      })
-  })
-
-  app.post('/api/movies', (req, res) => {
-    connection.query('INSERT INTO movies (movie) VALUES (?);',
-    [req.body.movie],
-    (err, result) => {
-        if (err) {
-            return res.status(500).end()
-        }
-        res.json({ id: result.insertId });
-        console.log({ id: result.insertId });
-    })
-})
-
-
-
-
-
-
-
-
-app.listen(PORT, () =>
-  console.log(`Server listening on: http://localhost:${PORT}`)
-);
+  //ROUTES 
