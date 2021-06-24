@@ -1,22 +1,57 @@
-<ul>
-  {{#each plans}}
-  <li>
-    <p>
-      {{this.id}}. {{this.plan}}
-
-      <button data-planid="{{this.id}}" class="delplan">Delete Plan!</button>
-    </p>
-  </li>
-  {{/each}}
-</ul>
-
-
 <ul> 
     {{#each movies}}
     <li>
         <p>
             {{movie}}
         </p>
+        <button id="deleteMovie">
+            Delete Movie!
+        </button>
     </li>
     {{/each}}
 </ul>
+
+
+<h2>Enter a movie to add:</h2>
+<form id='addMovie' class='button-size'>
+    <textarea type="text" name="movie"></textarea>
+    <button type="submit">
+        Add Movie!!
+    </button>
+</form> 
+
+<h2>Update a movie</h2>
+<form id="updateMovie" class="button-size">
+    <input type="text" name="id" placeholder="id">
+    <textarea type="text" name="movie" placeholder="new movie title"></textarea>
+    <button type="submit">Update movie!</button>
+</form>
+
+<script type="text/javeascript">
+
+  const deleteMovieBtns = document.querySelectorAll('.delmovie')
+
+  deleteMovieBtns.forEach(button => {
+    button.addEventListener('click', (e) => {
+      const id = e.target.getAttribute('data-movieid')
+      console.log('delete movie id', id)
+
+
+    fetch(`/api/movies/${id}`, {
+      method 'DELETE', 
+    }).then(() => {
+      console.log(`Deleted ID: ${id}`)
+
+      location.reload()
+    })
+    })
+
+    })
+
+
+
+
+
+
+</script>
+

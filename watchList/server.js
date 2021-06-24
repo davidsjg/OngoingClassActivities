@@ -40,6 +40,24 @@ const connection = mysql.createConnection({
       })
   })
 
+  app.post('/api/movies', (req, res) => {
+    connection.query('INSERT INTO movies (movie) VALUES (?);',
+    [req.body.movie],
+    (err, result) => {
+        if (err) {
+            return res.status(500).end()
+        }
+        res.json({ id: result.insertId });
+        console.log({ id: result.insertId });
+    })
+})
+
+
+
+
+
+
+
 
 app.listen(PORT, () =>
   console.log(`Server listening on: http://localhost:${PORT}`)
