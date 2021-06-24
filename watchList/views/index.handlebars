@@ -11,3 +11,47 @@
     </li>
     {{/each}}
 </ul>
+
+<h2>Add a Movie to Watch</h2>
+<form id="addMovie" class="button-size">
+    <textarea type='text' name='movie' id="newMovie"></textarea>
+    <button type='submit'>Save Movie</button>
+</form>
+
+
+<script type='text/javascript'>
+
+ // CREATE
+  const createMovieBtn = document.getElementById('addMovie')
+  // Set up the event listener for the create button
+  createMovieBtn.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Grabs the value of the textarea that goes by the name, "movie"
+    const newMovie = {
+      movie: document.getElementsByName('movie')[0].value.trim()
+    }
+    console.log(newMovie);
+
+    // Send POST request to create a new movie
+    fetch("/api/movies", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+
+      //make sure to serialize the JSON body
+      body: JSON.stringify(newMovie)
+    })
+      .then((response) => {
+        // Empty the form
+        document.getElementsByName('movie')[0].value = ''
+
+        // Reload the page so the user can see the new movie
+        console.log("Created a new movie!")
+        location.reload()
+      });
+})
+
+</script>

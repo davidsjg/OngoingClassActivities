@@ -46,6 +46,23 @@ const connection = mysql.createConnection({
       )
   })
 
+  app.post('/api/movies', (req, res) => {
+    connection.query(
+      'INSERT INTO movies (movie) VALUES (?)',
+      [req.body.movie],
+      (err, result) => {
+        if (err) {
+          return res.status(500).end()
+        }
+
+        //send back the ID of the new movie
+        res.json({ id: result.insertId})
+        console.log({ id: result.insertId})
+      }
+    )
+  })
+
+
 
 
 
