@@ -31,6 +31,7 @@
 
   const deleteMovieBtns = document.querySelectorAll('.delmovie')
 
+  //Delete
   deleteMovieBtns.forEach(button => {
     button.addEventListener('click', (e) => {
       const id = e.target.getAttribute('data-movieid')
@@ -47,6 +48,21 @@
     })
 
     })
+
+
+  //Create
+  const createMovieBtn = document.getElementById('addMovie')
+
+  //Add event listener for create button 
+  createMovieBtn.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    const newMovie = { 
+      movie: document.getElementsByName('movie')[0].value.trim()
+    }
+    console.log(newMovie)
+
+  })
 
 
 
