@@ -81,6 +81,15 @@ app.delete('/api/movies/:id', (req, res) => {
   );
 });
 
+// app.put('/api/movies/:id', (req, res) => {
+//   connection.query(
+//     'UPDATE movies SET movie = ? WHERE id = ?',
+//     []  
+    
+    
+//     )
+// })
+
   // Start our server so that it can begin listening to client requests.
 // Log (server-side) when our server has started
 app.listen(PORT, () =>
