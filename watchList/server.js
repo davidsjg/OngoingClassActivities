@@ -81,14 +81,21 @@ app.delete('/api/movies/:id', (req, res) => {
   );
 });
 
-// app.put('/api/movies/:id', (req, res) => {
-//   connection.query(
-//     'UPDATE movies SET movie = ? WHERE id = ?',
-//     []  
-    
-    
-//     )
-// })
+app.put('/api/movies/:id', (req, res) => {
+  connection.query(
+    'UPDATE movies SET movie = ? WHERE id = ?',
+    [req.body.movie, req.params.id],
+    (err, result) => {
+      if (err) {
+        return res.status(500).end()
+      }
+      if (result.changedRows === 0) {
+        return res.status(404).end()
+      }
+      res.status(200).end()
+    }  
+    )
+})
 
   // Start our server so that it can begin listening to client requests.
 // Log (server-side) when our server has started

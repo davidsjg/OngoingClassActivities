@@ -82,5 +82,38 @@
     })
   })
 
+// UPDATE
+
+const updateMovieBtn = document.getElementById('updateMovie')
+
+updateMovieBtn.addEventListener('submit', (e) => {
+  e.preventDefault
+
+  const id = document.getElementsByName('id')[0].value
+  const updatedMovie = {
+    movie: document.getElementsByName('movie')[1].value
+  }
+  console.log('updatedMovie', updatedMovie)
+
+  fetch(`/api/movies/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+
+    body: JSON.stringify(updatedMovie)
+  })
+    .then((response) => {
+      if (response.ok) {
+        console.log(`Updated the movie with the id: ${id}`)
+        location.reload()
+      } else {
+        alert('something went wrong!')
+      }
+    })
+})
+
+
 
 </script>
