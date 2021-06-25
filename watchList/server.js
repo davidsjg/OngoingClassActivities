@@ -63,13 +63,23 @@ const connection = mysql.createConnection({
   })
 
 
-
-
-
-
-
-
-
+app.delete('/api/movies/:id', (req, res) => {
+  connection.query(
+    'DELETE FROM movies WHERE id = ?',
+    [req.params.id],
+    (err, result) => {
+      if (err) {
+        // If an error occurred, send a generic server failure
+        return res.status(500).end();
+      }
+      if (result.affectedRows === 0) {
+        // If no rows were changed, then the ID must not exist, so 404
+        return res.status(404).end();
+      }
+      res.status(200).end();
+    }
+  );
+});
 
   // Start our server so that it can begin listening to client requests.
 // Log (server-side) when our server has started

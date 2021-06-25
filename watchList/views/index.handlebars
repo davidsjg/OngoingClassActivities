@@ -54,4 +54,26 @@
       });
 })
 
+
+  // DELETE
+  // Get the button
+  const deleteMovieBtns = document.querySelectorAll('.delMovie')
+
+
+  deleteMovieBtns.forEach(button => {
+    button.addEventListener('click', (e) => {
+      const id = e.target.getAttribute('data-movieID')
+      console.log('delte movie id', id)
+
+      fetch(`/api/movies/${id}`, {
+        method: 'DELETE',
+      }).then(() => {
+        console.log(`Deleted ID: ${id}`)
+        location.reload()
+      })
+
+    })
+  })
+
+
 </script>
