@@ -87,7 +87,7 @@ app.put('/api/movies/:id', (req, res) => {
     [req.body.movie, req.params.id],
     (err, result) => {
       if (err) {
-        return res.status(500).end()
+        return res.status(404).end()
       }
       if (result.changedRows === 0) {
         return res.status(404).end()
