@@ -15,7 +15,9 @@
     <textarea id="quote" class="quote" rows="8" cols="40"></textarea>
     </div>
     <div>
-    <button type="submit" id="submitBtn">Add Quote</button>
+    <button data-id="{{id}}" type="submit" id="submitBtn">Add Quote</button>
+
+
     </div>
 
 </form>
@@ -27,5 +29,8 @@
         <p><span>Author: </span>{{author}}</p>
         <p><span>Quote: </span>{{quote}}</p>
     </li>
+
+    <button data-id="{{id}}" class="delQuote">Delete</button>
+    <a href='/{{id}}'>Update this quote</a>
     {{/each}}
 </ul>
