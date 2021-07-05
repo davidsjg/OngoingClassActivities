@@ -11,3 +11,5 @@ INSERT INTO quotes (quote, author) VALUES ("TiK ToK, on the clock; But the party
 INSERT INTO quotes (quote, author) VALUES ("They told him don't you ever come around here; Don't want to see your face, you better disappear; The fire's in their eyes and their words are really clear; So beat it, just beat it", "Dan Orrico");
 
 INSERT INTO quotes (quote, author) VALUES ("Sup bro?", "Ruby Pradhan");
+
+INSERT INTO quotes (quote, author) VALUES ("Isn't it our time, Mr. Hand?", "Spiccoli")
