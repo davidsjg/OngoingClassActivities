@@ -20,3 +20,12 @@
 
 </form>
 
+<ul>
+    {{#each quotes}}
+    <li>
+        <p><span>ID: </span>{{id}}</p>
+        <p><span>Author: </span>{{author}}</p>
+        <p><span>Quote: </span>{{quote}}</p>
+    </li>
+    {{/each}}
+</ul>

@@ -31,6 +31,7 @@ connection.connect((err) => {
     console.log(`connected as id ${connection.threadId}`);
   });
 
+
 app.get('/', (req, res) => {
     connection.query('SELECT * FROM quotes', (err, data) => {
         if (err) {
@@ -39,6 +40,20 @@ app.get('/', (req, res) => {
 
         res.render('index', {quotes: data})
     })
+})
+
+//POST NEW QUOTE 
+app.post('/api/quotes', (req, res) => {
+  connection.query('INSERT INTO quotes (author, quote) VALUES (?, ?)',
+  [req.body.author, req.body.quote],
+  (err, data) => {
+    if (err) {
+      return res.status(500).end()
+    }
+
+    //send back the id of the new quote 
+    res.json({ id: data.insertId})
+  })
 })
 
 app.listen(PORT, () =>
