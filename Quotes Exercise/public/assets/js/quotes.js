@@ -32,3 +32,23 @@ if (createQuote) {
         })
     })
 }
+
+
+//DELETE
+const deleteBtn = document.getElementsByName('dltBtn') 
+
+deleteBtn.forEach((button) => {
+    button.addEventListener('click', (e) => { 
+        const id = e.target.getAttribute('data-id')
+        console.log('delete quote id', id)
+    })
+
+    fetch(`api/quotes/${id}`, {
+        method: 'DELETE'
+    }).then((res) => {
+        console.log(res)
+        console.log(`Deleted ID: ${id}`)
+        //reload the page
+        location.reload()
+    })
+})
