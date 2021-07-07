@@ -1,7 +1,5 @@
 
-const createQuote = document.getElementById('createQuote')
-const newAuthor = document.getElementById('author')
-const newQuote = document.getElementById('quote')
+
 const submitBtn = document.getElementById('submitBtn')
 
 
@@ -10,31 +8,42 @@ document.addEventListener('DOMContentLoaded', (event) => {
       console.info('DOM loaded');
     }
 
-//CREATE QUOTE 
-// if (createQuote) {
-//     newQuote.addEventListener('submit', (e) => {
 
-//         const newQuote = {
-//             author: newAuthor,
-//             quote: newQuote,
-//         }
-//         console.log(newQuote)
+// CREATE QUOTE 
+const createQuoteBtn = document.getElementById('create-form')
 
-//         fetch('/api/quotes', {
-//             method: 'POST',
-//             headers: {
-//                 Accept: 'application/json',
-//                 'Content-Type': 'application/json'
-//             },
 
-//         body: JSON.stringify(newQuote),    
-//         }).then((response) => {
-//             newAuthor.value = ''
-//             newQuote.value = ''
-//             location.reload()
-//         })
-//     })
-// }
+    createQuoteBtn.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Grabs the value of the textarea that goes by the name, "quote"
+      const newQuote = {
+        author: document.getElementById('auth').value.trim(),
+        quote: document.getElementById('quo').value.trim(),
+      };
+      console.log(newQuote);
+
+      // Send POST request to create a new quote
+      fetch('/api/quotes', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+
+        // make sure to serialize the JSON body
+        body: JSON.stringify(newQuote),
+      }).then((res) => {
+        // Empty the form
+        document.getElementsByName('quote')[0].value = '';
+
+        // Reload the page so the user can see the new quote
+        console.log('Created a new quote!');
+        location.reload();
+      });
+    });
+  
+
 
 
 //DELETE

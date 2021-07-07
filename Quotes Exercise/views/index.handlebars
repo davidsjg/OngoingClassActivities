@@ -4,22 +4,20 @@
 
 <h2>Add a Quote</h2>
 
-<form id="createQuote">
-    <div>
-    <label>Author</label>
-    <input id="author"></input>
-    </div>
 
-    <div>
-    <label>Quote &nbsp</label>
-    <textarea id="quote" class="quote" rows="8" cols="40"></textarea>
-    </div>
-    <div>
-    <button data-id="{{id}}" type="submit" id="submitBtn">Add Quote</button>
+<form id="create-form">
 
+  <div class="form-group">
+    <label for="auth">Author:</label>
+    <input type="text" id="auth" name="author">
+  </div>
 
-    </div>
+  <div class="form-group">
+    <label for="quo">Quote:</label>
+    <textarea id="quo" name="quote" rows="8" cols="40"></textarea>
+  </div>
 
+  <button type="submit">Add Quote</button>
 </form>
 
 <ul>

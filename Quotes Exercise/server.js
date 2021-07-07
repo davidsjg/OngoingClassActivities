@@ -44,38 +44,22 @@ app.get('/', (req, res) => {
 
 //POST NEW QUOTE 
 app.post('/api/quotes', (req, res) => {
-  connection.query('INSERT INTO quotes (author, quote) VALUES (?, ?)',
-  [req.body.author, req.body.quote],
-  (err, data) => {
-    if (err) {
-      return res.status(500).end()
+  connection.query(
+    'INSERT INTO quotes (author, quote) VALUES (?, ?)',
+    [req.body.author, req.body.quote],
+    (err, result) => {
+      if (err) {
+        // If an error occurred, send a generic server failure
+        return res.status(500).end();
+      }
+
+      // Send back the ID of the new quote
+      res.json({ id: result.insertId });
     }
+  );
+});
 
-    //send back the id of the new quote 
-    res.json({ id: data.insertId})
-  })
-})
 
-app.listen(PORT, () =>
-  console.log(`Server listening on: http://localhost:${PORT}`)
-);
-
-//DELETE
-// app.delete('/api/quotes/:id', (req, res) => {
-//   connnection.query(
-//     'DELETE FROM quotes WHERE id = ?',
-//     [req.params.id],
-//     (err, result) => {
-//       if (err) {
-//         return res.status(500).end()
-//       }
-//       if (result.affectedRows === 0) {
-//         return res.status(404).end()
-//       }
-//       res.status(200).end()
-//     }
-//   )
-// })
 
 app.delete('/api/quotes/:id', (req, res) => {
   connection.query(
@@ -94,3 +78,8 @@ app.delete('/api/quotes/:id', (req, res) => {
     }
   );
 });
+
+
+app.listen(PORT, () =>
+  console.log(`Server listening on: http://localhost:${PORT}`)
+);
