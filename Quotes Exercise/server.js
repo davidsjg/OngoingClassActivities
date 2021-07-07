@@ -59,3 +59,38 @@ app.post('/api/quotes', (req, res) => {
 app.listen(PORT, () =>
   console.log(`Server listening on: http://localhost:${PORT}`)
 );
+
+//DELETE
+// app.delete('/api/quotes/:id', (req, res) => {
+//   connnection.query(
+//     'DELETE FROM quotes WHERE id = ?',
+//     [req.params.id],
+//     (err, result) => {
+//       if (err) {
+//         return res.status(500).end()
+//       }
+//       if (result.affectedRows === 0) {
+//         return res.status(404).end()
+//       }
+//       res.status(200).end()
+//     }
+//   )
+// })
+
+app.delete('/api/quotes/:id', (req, res) => {
+  connection.query(
+    'DELETE FROM quotes WHERE id = ?',
+    [req.params.id],
+    (err, result) => {
+      if (err) {
+        // If an error occurred, send a generic server failure
+        return res.status(500).end();
+      }
+      if (result.affectedRows === 0) {
+        // If no rows were changed, then the ID must not exist, so 404
+        return res.status(404).end();
+      }
+      res.status(200).end();
+    }
+  );
+});
