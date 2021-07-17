@@ -27,6 +27,12 @@
           </div>
 
           <div class="col" id="blogDisplay">
+            {{#each results}}
+            <li>
+              <p><span class="label">ID:</span> {{}}</p>
+              <p><span class="label">Quote:</span> {{this.quote}}</p>
+              <p><span class="label">Author:</span> {{this.author}}</p>
+            </li>
           </div>
 
           <div class="col">
