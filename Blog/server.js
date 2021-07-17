@@ -23,8 +23,11 @@ app.engine('handlebars', expbs ({ defaultLayout: "main", partialsDir: __dirname 
 app.set('view engine', 'handlebars');
 
 //routes
-require('./routes/api-routes.js')(app)
-require('./routes/html-routes.js')(app)
+const HTMLrouter = require('./routes/html-routes.js')
+HTMLrouter(app)
+
+const APIrouter = require('./routes/html-routes.js')
+APIrouter(app)  
 
 //syncing our sequelize models and then starting our express app
 
