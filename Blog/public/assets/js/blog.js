@@ -1,6 +1,6 @@
-const button = document.getElementById('testButton')
+const blogDisp = document.getElementById('blogDisplay')
 
-
-button.addEventListener('click', () => {
-    alert('You clicked a button')
-})
+ 
+if (!blogDisp.value) {
+    blogDisp.textContent = "No Blog Entries To Display....Yet"
+}

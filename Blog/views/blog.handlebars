@@ -4,33 +4,37 @@
         <div class="row">
           <div class="col">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown button
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </div>
+
+                <form action="/api/search/type/" method="GET">
+                  <select class="form-select" aria-label="Default select example" name="type">
+                    <option selected>All Categories</option>
+                    <option value="Personal">Personal</option>
+                    <option value="ProductReview">Product Review</option>
+                    <option value="Political">Political</option>
+                  </select>
+                    <div class="card-action center-align">
+                      <a id="postbtn" type="button" class="btn btn-danger" href="cms">POST</a>
+                    </div>
+                </form>
+
+            </div>
           </div>
-          <div class="col">
-            2 of 2
-          </div>
-        </div>
+        </div>  
+
         <div class="row">
+
           <div class="col">
-            1 of 3
           </div>
+
+          <div class="col" id="blogDisplay">
+          </div>
+
           <div class="col">
-            2 of 3
           </div>
-          <div class="col">
-            3 of 3
-          </div>
+
         </div>
       </div>
-      <button type="button" class="btn btn-primary" id="testButton">Primary</button>
+
 </body>
 
 {{!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
