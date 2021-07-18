@@ -1,36 +1,47 @@
 const express = require('express');
-const expbs = require('express-handlebars');
-
-// Sets up the Express App
 const app = express();
+const exphbs = require('express-handlebars');
 const PORT = process.env.PORT || 8080;
-
-// Requiring our models for syncing
-const db = require('./models')
+const db =require("./models")
 
 var compression = require('compression')
 
-// Sets up the Express app to handle data parsing 
-app.use(express.urlencoded({extended: true}))
-app.use(express.json())
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// app.use(express.static(path.join(__dirname, '/public')));
 app.use(compression())
 
-//static director 
-app.use(express.static('public'))
+const path = require('path');
 
-//handlebars
-app.engine('handlebars', expbs ({ defaultLayout: "main", partialsDir: __dirname + './public/views'}));
-app.set('view engine', 'handlebars');
+// app.engine('handlebars', exphbs ({ defaultLayout: "main"}));
+// app.set('view engine', 'handlebars');
 
-//routes
-const HTMLrouter = require('./routes/html-routes.js')
-HTMLrouter(app)
+var hbs = exphbs.create({
+  defaultLayout: "main",
+  extname: ".hbs",
+  helpers: {
+    section: function(name, options) { 
+      if (!this._sections) this._sections = {};
+        this._sections[name] = options.fn(this); 
+        return null;
+      }
+  }    
+});
+app.engine('hbs', hbs.engine);
+app.set('view engine', '.hbs');
 
-const APIrouter = require('./routes/html-routes.js')
-APIrouter(app)  
+// add the filepath to our controller where the / is
+const HTMLrouter = require("./routes/html-routes");
+// app.use(router);
+HTMLrouter(app);
 
-//syncing our sequelize models and then starting our express app
+const APIrouter = require("./routes/api-routes");
+APIrouter(app);
 
-db.sequelize.sync({ force:true}).then(() => {
-    app.listen(PORT, () => console.log(`Listening on ${PORT}`))
-})
+db.sequelize.sync()
+.then(function () {
+  app.listen(PORT, function () {
+    console.log("App now listening on port:", PORT);
+  });
+});
