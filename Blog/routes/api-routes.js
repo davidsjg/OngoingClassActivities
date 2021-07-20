@@ -19,7 +19,8 @@ module.exports = (app) => {
         })
         .then((dbPost) => {
         
-        return res.render('blog', {scripts: blogScript})
+        // return res.render('blog', {scripts: blogScript})
+        return dbPost
     })
     })
 }

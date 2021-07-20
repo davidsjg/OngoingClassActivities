@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-5 offset-md-3">
                 <form id="cms">
-                    <div class="form-group">
+                    <div class="form-group" id="formGroup">
                             <label for="title">Title:</label>
                             <input type="text" class="form-control" id="title">
                         <br />
@@ -25,7 +25,7 @@
                             </select>
                         </div>  
                         <br/>
-                            <button type="submit" class="btn btn-success submit btn-lg">Submit</button>
+                            <button type="submit" class="btn btn-success submit btn-lg" id="formButton">Submit</button>
                     </div>
                 </form>
             </div>
@@ -36,3 +36,61 @@
 </body>
 
 
+{{#section 'script'}}
+
+<script type="application/javascript">
+document.addEventListener('DOMContentLoaded', (e) => {
+  console.log('DOM loaded! 🚀');
+const newTitle = document.getElementById('title')
+const newBody = document.getElementById('body')
+const newCategory = document.getElementById('category')
+const formSubmit = document.getElementById('cms')
+const formBtn = document.getElementById('formButton')
+
+
+
+formSubmit.addEventListener('submit', (e) => {
+e.preventDefault()
+
+
+const title = newTitle.value.trim()
+const body = newBody.value.trim()
+const category = newCategory.value
+console.log(title)
+console.log(body)
+console.log(category)
+
+const newPost = {
+    title: title,
+    body: body,
+    category: category,
+}
+
+submitPost(newPost)
+
+})
+
+const submitPost = (post) => {
+    fetch('/api/posts', {
+        method: 'Post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(post),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log('Success in submitting post:', data)
+        window.location.href = '/blog'
+    })
+    .catch((error) => {
+        console.log('Error', error)
+    })
+}
+
+
+});
+
+</script>
+
+{{/section}}
