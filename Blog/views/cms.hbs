@@ -70,23 +70,23 @@ submitPost(newPost)
 
 })
 
-const submitPost = (post) => {
+  const submitPost = (post) => {
     fetch('/api/posts', {
-        method: 'Post',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(post),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(post),
     })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log('Success in submitting post:', data)
-        window.location.href = '/blog'
-    })
-    .catch((error) => {
-        console.log('Error', error)
-    })
-}
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success in submitting post:', data);
+        window.location.href = '/blog';
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
 
 
 });

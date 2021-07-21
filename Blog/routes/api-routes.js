@@ -11,16 +11,11 @@ module.exports = (app) => {
     })
 
     app.post('/api/posts', (req, res) => {
-        console.log(req.body)
+        console.log(req.body);
         db.Post.create({
-            title: req.body.title,
-            body: req.body.body,
-            category: req.body.category,
-        })
-        .then((dbPost) => {
-        
-        // return res.render('blog', {scripts: blogScript})
-        return dbPost
-    })
-    })
+          title: req.body.title,
+          body: req.body.body,
+          category: req.body.category,
+        }).then((dbPost) => res.json(dbPost));
+      });
 }
