@@ -49,13 +49,62 @@
 
 </body>
 
-<p>Custom Script Section</p>
+
 
 {{#section 'script'}}
 
 <script type="application/javascript">
+document.addEventListener('DOMContentLoaded', (e) => {
+  console.log('DOM loaded! 🚀');
 
-alert('sup yall')
+
+let blogDisp = document.getElementById('blogDisplay')
+
+
+
+const getPosts = (category) => {
+  let categoryString = category || '';
+  if (categoryString) {
+    categoryString = categoryString.replace(' ', '');
+    categoryString = `category/${categoryString}`;
+  }
+
+  fetch(`/api/posts/${categoryString}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then((response) => response.json())
+    .then((data) => {
+      console.log('Success in getting posts:', data);
+      posts = data;
+
+      if (!posts.length) {
+        blogDisp.textContent='no blogs to display...yet'
+      } 
+      alert('figure it out')
+
+    })
+    .catch((error) => console.error('Error:', error));
+};
+
+getPosts()
+
+
+
+
+
+
+
+
+
+
+
+
+
+})
+
+
 </script>
 
 {{/section}}

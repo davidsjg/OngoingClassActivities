@@ -1,14 +1,26 @@
 const db = require('../models')
 
 module.exports = (app) => {
-    var scripts = [{ script: 'assets/js/blog.js' }];
+    
+  
     app.get('/api/posts', (req, res) => {
-        db.Post.findAll({})
-
-        .then((dbPost) => {
-            return res.render("blog", {results: dbPost, scripts: scripts})
-        })
+      db.Post.findAll({})
+      .then((dbPost) => {
+        res.json(dbPost)
+        res.render('blog', {results: dbPost})
+      }
+      )
     })
+
+
+
+    // app.get('/api/posts', (req, res) => {
+    //     db.Post.findAll({})
+
+    //     .then((dbPost) => {
+    //         return res.render("blog")
+    //     })
+    // })
 
     app.post('/api/posts', (req, res) => {
         console.log(req.body);
@@ -18,4 +30,7 @@ module.exports = (app) => {
           category: req.body.category,
         }).then((dbPost) => res.json(dbPost));
       });
+
+
+    // app.get('api/posts/category')
 }
