@@ -24,6 +24,7 @@ var hbs = exphbs.create({
   runtimeOptions: {
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true
+    
   },
   helpers: {
     section: function(name, options) { 
