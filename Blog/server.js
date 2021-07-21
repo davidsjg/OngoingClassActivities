@@ -4,12 +4,13 @@ const exphbs = require('express-handlebars');
 const PORT = process.env.PORT || 8080;
 const db =require("./models")
 
+
 var compression = require('compression')
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(express.static(path.join(__dirname, '/public')));
+
 app.use(compression())
 
 const path = require('path');
@@ -20,6 +21,10 @@ const path = require('path');
 var hbs = exphbs.create({
   defaultLayout: "main",
   extname: ".hbs",
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true
+  },
   helpers: {
     section: function(name, options) { 
       if (!this._sections) this._sections = {};

@@ -6,21 +6,26 @@ module.exports = (app) => {
     app.get('/api/posts', (req, res) => {
       db.Post.findAll({})
       .then((dbPost) => {
+        console.log(dbPost)
+        // res.render('cms', {results: dbPost})
         res.json(dbPost)
-        res.render('blog', {results: dbPost})
-      }
-      )
+        // return res.render("blog", {results: dbPost})
     })
+  })
+
+  // app.get('/api/posts/', (req, res) => {
+  //   db.Post.findAll({}).then((dbPost) => {
+  //     res.render('blog', {results: dbPost})
+  //   }
+  //   );
+  // });
+
+  // app.get('/api/posts/', (req, res) => {
+  //   db.Post.findAll({}).then((dbPost) => res.render({results: dbPost}));
+  // });
 
 
 
-    // app.get('/api/posts', (req, res) => {
-    //     db.Post.findAll({})
-
-    //     .then((dbPost) => {
-    //         return res.render("blog")
-    //     })
-    // })
 
     app.post('/api/posts', (req, res) => {
         console.log(req.body);

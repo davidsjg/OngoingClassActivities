@@ -30,9 +30,10 @@
             <ul>
               {{#each results}}
                 <li>
-                  <p><span class="label">Title:</span> {{title}}</p>
-                  <p><span class="label">Body:</span> {{body}}</p>
-                  <p><span class="label">Category:</span> {{category}}</p>
+                  console.log(results)
+                  <p><span class="label">Title:</span> {{this.title}}</p>
+                  <p><span class="label">Body:</span> {{this.body}}</p>
+                  <p><span class="label">Category:</span> {{this.category}}</p>
                 </li>
               {{/each}}
             </ul>
@@ -68,20 +69,17 @@ const getPosts = (category) => {
     categoryString = categoryString.replace(' ', '');
     categoryString = `category/${categoryString}`;
   }
+  console.log('category string =' & categoryString)
 
   fetch(`/api/posts/${categoryString}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then((response) => response.json())
-    .then((data) => {
-      console.log('Success in getting posts:', data);
-      posts = data;
+  }).then((dbPost) => {
+      console.log(dbPost);
 
-      if (!posts.length) {
-        blogDisp.textContent='no blogs to display...yet'
-      } 
+
       alert('figure it out')
 
     })
