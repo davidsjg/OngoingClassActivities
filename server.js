@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 // POST: /submit
 // ===========================================
   app.get('/submit', (req, res) => {
-    db.notes.insert(req.body, (error, data) => {
+    db.notes.insert(req.body, (err, data) => {
       if (err) {
         res.send(err)
       } else {
@@ -40,16 +40,39 @@ app.get("/", (req, res) => {
       }
     })
   }
-
+  )
 // 2. Retrieve all notes from the database's collection
 // GET: /all
 // ====================================================
+app.get('/all', (req, res) => {
+  db.notes.find({}, (err, data) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send(data)
+    }
+  })
+})
 
 // 3. Retrieve one note in the database's collection by it's ObjectId
 // TIP: when searching by an id, the id needs to be passed in
 // as (mongojs.ObjectId(IdYouWantToFind))
 // GET: /find/:id
 // ==================================================================
+app.get('/find/:id', (req, res) => { 
+
+  db.notes.findOne(
+    { 
+      _id: mongojs.ObjectID(req.params.id)
+    }, 
+    (err, data) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send(data)
+    }
+  })
+})
 
 // 4. Update one note in the database's collection by it's ObjectId
 // (remember, mongojs.ObjectId(IdYouWantToFind)
