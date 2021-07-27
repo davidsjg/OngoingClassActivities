@@ -1,10 +1,18 @@
 const express = require("express");
 const mongojs = require("mongojs");
+const logger = require("morgan");
 
 const app = express();
 
-const databaseUrl = "zoo";
-const collections = ["animals"];
+app.use(logger("dev"));
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(express.static("public"));
+
+const databaseUrl = "notetaker";
+const collections = ["notes"];
 
 const db = mongojs(databaseUrl, collections);
 
@@ -13,42 +21,51 @@ db.on("error", error => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send(index.html);
 });
 
-app.get("/all", (req, res) => {
-  db.animals.find({}, (err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(data);
-    }
-  });
-});
+// TODO: You will make six more routes. Each will use mongojs methods
+// to interact with your mongoDB database, as instructed below.
+// -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
-// TODO: Implement the remaining two routes
+// 1. Save a note to the database's collection
+// POST: /submit
+// ===========================================
+  app.get('/submit', (req, res) => {
+    db.notes.insert(req.body, (error, data) => {
+      if (err) {
+        res.send(err)
+      } else {
+      res.send(data)
+      }
+    })
+  }
 
-// 1: Name: Send JSON response sorted by name in ascending order, e.g. GET "/name"
-app.get("/name", (req, res) => {
-  db.animals.find().sort({name: 1}, (err, data) => {
-    if (err) {
-      console.log(err)
-    }
-    res.json(data)
-  })
-  })
+// 2. Retrieve all notes from the database's collection
+// GET: /all
+// ====================================================
 
-// 2: Weight: Send JSON response sorted by weight in descending order, , e.g. GET "/weight"
-app.get('/weight', (req, res) => {
-  db.animals.find().sort({weight: -1}, (err, data) => {
-    if (err) {
-      console.log(err)
-    }
-    res.json(data)
-  })
-})
+// 3. Retrieve one note in the database's collection by it's ObjectId
+// TIP: when searching by an id, the id needs to be passed in
+// as (mongojs.ObjectId(IdYouWantToFind))
+// GET: /find/:id
+// ==================================================================
 
-// Set the app to listen on port 3000
+// 4. Update one note in the database's collection by it's ObjectId
+// (remember, mongojs.ObjectId(IdYouWantToFind)
+// POST: /update/:id
+// ================================================================
+
+// 5. Delete one note from the database's collection by it's ObjectId
+// (remember, mongojs.ObjectId(IdYouWantToFind)
+// DELETE: /delete/:id
+// ==================================================================
+
+// 6. Clear the entire note collection
+// DELETE: /clearall
+// ===================================
+
+// Listen on port 3000
 app.listen(3000, () => {
   console.log("App running on port 3000!");
 });
