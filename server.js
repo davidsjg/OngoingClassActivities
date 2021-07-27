@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 // 1. Save a note to the database's collection
 // POST: /submit
 // ===========================================
-  app.get('/submit', (req, res) => {
+  app.post('/submit', (req, res) => {
     db.notes.insert(req.body, (err, data) => {
       if (err) {
         res.send(err)
@@ -78,15 +78,58 @@ app.get('/find/:id', (req, res) => {
 // (remember, mongojs.ObjectId(IdYouWantToFind)
 // POST: /update/:id
 // ================================================================
+app.post('/update/:id', (req, res) => {
+  db.notes.update(
+    {
+      _id: mongojs.ObjectID(req.params.id)
+    }, 
+    {
+      $set: {
+        titles: req.body.title,
+        note: req.body.note,
+        modified: Date.now()
+      }
+    },
+    (err, data) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send(data)
+    }
+  })
+})
+
 
 // 5. Delete one note from the database's collection by it's ObjectId
 // (remember, mongojs.ObjectId(IdYouWantToFind)
 // DELETE: /delete/:id
 // ==================================================================
+app.delete('/delete/:id', (req, res) => {
+  db.notes.remove(
+    {
+      _id: mongojs.ObjectID(req.params.id)
+    }
+    , (err, data) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send(data)
+    }
+  })
+})
 
 // 6. Clear the entire note collection
 // DELETE: /clearall
 // ===================================
+app.delete('clearall', (req, res) => {
+  db.notes.remove({}, (err, data) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send(data)
+    }
+  })
+})
 
 // Listen on port 3000
 app.listen(3000, () => {
