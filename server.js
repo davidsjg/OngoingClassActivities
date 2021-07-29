@@ -64,9 +64,7 @@ app.get("/populateduser", (req, res) => {
   // TIP: Check the models out to see how the Notes refers to the User
   db.User.find({})
   .populate('notes')
-  .then(dbLibrary => {
-    res.json(dbLibrary)
-  })
+  .then(dbLibrary => {res.json(dbLibrary)})
   .catch(err => {
     res.json(err)
   })
