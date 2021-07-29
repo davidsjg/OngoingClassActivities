@@ -1,12 +1,10 @@
-// Add code to userModel.js to complete the model
-
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
 const PORT = process.env.PORT || 3000;
 
-const User = require("./userModel.js");
+const db = require("./models");
 
 const app = express();
 
@@ -17,31 +15,62 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/custommethoddb", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { useNewUrlParser: true });
 
-// Routes
+db.User.create({ name: "Ernest Hemingway" })
+  .then(dbUser => {
+    console.log(dbUser);
+  })
+  .catch(({ message }) => {
+    console.log(message);
+  });
 
-// Route to post our form submission to mongoDB via mongoose
-app.post("/submit", ({body}, res) => {
-  // Create a new user using req.body
-  const user = new User(body) 
+app.get("/notes", (req, res) => {
+  db.Note.find({})
+    .then(dbNote => {
+      res.json(dbNote);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
 
-  user.setFullName()
-  user.lastUpdatedDate()
-
-
-  // Update this route to run the `setFullName` and `lastUpdatedDate` methods before creating a new User
-  // You must create these methods in the model.
-
-  User.create(user)
+app.get("/user", (req, res) => {
+  db.User.find({})
     .then(dbUser => {
-      // If saved successfully, send the the new User document to the client
       res.json(dbUser);
     })
     .catch(err => {
-      // If an error occurs, send the error to the client
       res.json(err);
     });
+});
+
+app.post("/submit", ({ body }, res) => {
+  db.Note.create(body)
+    .then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { notes: _id } }, { new: true }))
+    .then(dbUser => {
+      res.json(dbUser);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+app.get("/populateduser", (req, res) => {
+  // TODO
+  // =====
+  // Write the query to grab the documents from the User collection,
+  // and populate them with any associated Notes.
+  // TIP: Check the models out to see how the Notes refers to the User
+  db.User.find({})
+  .populate('notes')
+  .then(dbLibrary => {
+    res.json(dbLibrary)
+  })
+  .catch(err => {
+    res.json(err)
+  })
+
 });
 
 // Start the server
