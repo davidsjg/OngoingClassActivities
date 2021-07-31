@@ -1,8 +1,17 @@
 import React from "react";
-import JSXVariables from "./components/JSXVariables";
+import Header from "./components/Header";
+import Section from "./components/Section";
+
+import Navbar from "./components/Navbar";
 
 function App() {
-  return <JSXVariables />;
+  return (
+    <div>
+      <Navbar />
+      <Header />
+      <Section />
+    </div>
+  );
 }
 
 export default App;
