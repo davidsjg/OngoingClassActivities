@@ -1,8 +1,8 @@
 import React from "react";
-import HelloReact from "./components/HelloReact";
+import HelloDiv from "./components/HelloDiv";
 
 function App() {
-  return <HelloReact />;
+  return <HelloDiv />;
 }
 
 export default App;
