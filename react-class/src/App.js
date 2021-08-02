@@ -1,17 +1,8 @@
 import React from "react";
-import Header from "./components/Header";
-import Section from "./components/Section";
-
-import Navbar from "./components/Navbar";
+import Calculator from "./components/Calculator";
 
 function App() {
-  return (
-    <div>
-      <Navbar />
-      <Header />
-      <Section />
-    </div>
-  );
+  return <Calculator />;
 }
 
 export default App;
