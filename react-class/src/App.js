@@ -1,42 +1,88 @@
-import React from "react";
-import List from "./components/List";
 
+import React from 'react'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import Nav from './components/Nav/Nav';
+import JZDavidson from './pages/JZDavidson'
+import AboutMe from './pages/AboutMe'
+import Resume from './pages/Resume'
+import Contact from './pages/Contact'
+import Portfolio from './pages/Portfolio'
+import Footer from './components/Footer/Footer'
+import './App.css'
 
-const groceries = [
+const projects = [
   {
-    id: 1,
-    name: "Milk",
-    purchased: true
+    name: 'Budget Tracker',
+    img: './images/BudgetTracker.png',
+    github: 'https://github.com/JDavid337/Progressive-Budget-Tracker',
+    deployed: 'www.tofollow.com'
   },
   {
-    id: 2,
-    name: "Eggs",
-    purchased: true
+    name: 'Chosen Outfit',
+    img: './images/ChosenOutfit.png',
+    github: 'https://github.com/JDavid337/Project-3/tree/main',
+    deployed: 'https://infinite-fjord-75479.herokuapp.com/'
   },
   {
-    id: 3,
-    name: "Cheese",
-    purchased: false
+    name: 'Express Note Taker',
+    img: './images/ExpressNoteTaker.png',
+    github: 'https://github.com/JDavid337/express-note-jotter',
+    deployed:  'https://express-note-jotter-jzd.herokuapp.com/'
   },
   {
-    id: 4,
-    name: "Cake Mix",
-    purchased: false
+    name: 'Lyric Finder',
+    img: './images/LyricFinder.png',
+    github: 'https://github.com/Lyndseyfin/Lyric-finder',
+    deployed:  'https://lyndseyfin.github.io/Lyric-finder/'
   },
   {
-    id: 5,
-    name: "Carrots",
-    purchased: false
+    name: 'Budget Tracker',
+    img: './images/Tripr.png',
+    github: 'https://github.com/JDavid337/Project-2-Travel-Green',
+    deployed:  'https://tripr-project2.herokuapp.com/'
   },
-  {
-    id: 6,
-    name: "Juice",
-    purchased: true
-  }
-];
+]
+
 
 function App() {
-  return <List groceries={groceries} />;
+  return (
+      <Router>
+
+        <Nav/>
+
+          <Switch>
+
+            <Route exact path={'/'}>
+              <AboutMe />
+            </Route>
+
+            <Route exact path={'/JZDavidson'}>
+              <JZDavidson />
+            </Route>
+
+            <Route exact path={'/Portfolio'}>
+              <Portfolio projects={projects}/>
+            </Route>
+
+            <Route exact path={'/AboutMe'}>
+              <AboutMe />
+            </Route>
+
+            <Route exact path={'/Resume'}>
+              <Resume />
+            </Route>
+
+            <Route exact path={'/Contact'}>
+              <Contact />
+            </Route>
+
+          </Switch>
+
+        <Footer/>
+
+      </Router>
+
+  );
 }
 
 export default App;
