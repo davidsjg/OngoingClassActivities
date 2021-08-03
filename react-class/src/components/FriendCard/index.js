@@ -2,26 +2,38 @@ import React from "react";
 import "./style.css";
 
 function FriendCard(props) {
+  console.log(props)
+  console.log(props.friends)
   return (
-    <div className="card">
+
+    props.friends.map(friend => (
+      <div key={friend.id} className="card">
       <div className="img-container">
-        <img alt={props.name} src={props.image} />
+        <img alt={friend.name} src={friend.image} />
       </div>
       <div className="content">
         <ul>
           <li>
-            <strong>Name:</strong> {props.name}
+            <strong>Name:</strong> {friend.name}
           </li>
           <li>
-            <strong>Occupation:</strong> {props.occupation}
+            <strong>Occupation:</strong> {friend.occupation}
           </li>
           <li>
-            <strong>Address:</strong> {props.location}
+            <strong>Address:</strong> {friend.location}
           </li>
         </ul>
       </div>
-      <span className="remove">𝘅</span>
+
+      <span className="remove" onClick={props.removeFriend}>𝘅</span>
     </div>
+    ))
+
+
+
+
+
+
   );
 }
 
