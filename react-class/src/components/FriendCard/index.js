@@ -3,38 +3,32 @@ import "./style.css";
 
 function FriendCard(props) {
   console.log(props)
-  console.log(props.friends)
-  return (
 
-    props.friends.map(friend => (
-      <div key={friend.id} className="card">
+  return (
+      <div key={props.id} className="card">
       <div className="img-container">
-        <img alt={friend.name} src={friend.image} />
+        <img alt={props.name} src={props.image} />
       </div>
       <div className="content">
         <ul>
           <li>
-            <strong>Name:</strong> {friend.name}
+            <strong>Name:</strong> {props.name}
           </li>
           <li>
-            <strong>Occupation:</strong> {friend.occupation}
+            <strong>Occupation:</strong> {props.occupation}
           </li>
           <li>
-            <strong>Address:</strong> {friend.location}
+            <strong>Address:</strong> {props.location}
           </li>
         </ul>
       </div>
 
-      <span className="remove" onClick={props.removeFriend}>𝘅</span>
+
+      <span onClick={() => props.removeFriend(props.id)} className="remove">
+        𝘅
+      </span>
     </div>
-    ))
-
-
-
-
-
-
-  );
+    )
 }
 
 export default FriendCard;
