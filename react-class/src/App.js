@@ -1,87 +1,46 @@
+import React from 'react';
+import FriendCard from './components/FriendCard';
+import Wrapper from './components/Wrapper';
+import Title from './components/Title';
+import friends from './friends.json';
 
-import React from 'react'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Nav from './components/Nav/Nav';
-import JZDavidson from './pages/JZDavidson'
-import AboutMe from './pages/AboutMe'
-import Resume from './pages/Resume'
-import Contact from './pages/Contact'
-import Portfolio from './pages/Portfolio'
-import Footer from './components/Footer/Footer'
-import './App.css'
 
-const projects = [
-  {
-    name: 'Budget Tracker',
-    img: './images/BudgetTracker.png',
-    github: 'https://github.com/JDavid337/Progressive-Budget-Tracker',
-    deployed: 'www.tofollow.com'
-  },
-  {
-    name: 'Chosen Outfit',
-    img: './images/ChosenOutfit.png',
-    github: 'https://github.com/JDavid337/Project-3/tree/main',
-    deployed: 'https://infinite-fjord-75479.herokuapp.com/'
-  },
-  {
-    name: 'Express Note Taker',
-    img: './images/ExpressNoteTaker.png',
-    github: 'https://github.com/JDavid337/express-note-jotter',
-    deployed:  'https://express-note-jotter-jzd.herokuapp.com/'
-  },
-  {
-    name: 'Lyric Finder',
-    img: './images/LyricFinder.png',
-    github: 'https://github.com/Lyndseyfin/Lyric-finder',
-    deployed:  'https://lyndseyfin.github.io/Lyric-finder/'
-  },
-  {
-    name: 'Budget Tracker',
-    img: './images/Tripr.png',
-    github: 'https://github.com/JDavid337/Project-2-Travel-Green',
-    deployed:  'https://tripr-project2.herokuapp.com/'
-  },
-]
+//convert from functional based to class based, use the state object, create removeFriend method, call FriendCard one time, passing down props as diff values in that object nested inside the array.  also, we are going to pass down the removeFriend function.  pass down props and map over 
 
+class FriendState extends React.Component {
+
+  state = {
+    dispFriends: 0
+  }
+}
+
+handleIncrement = () => {
+  this.setState({dispFriends: this.dispFriends + 1})
+}
 
 function App() {
   return (
-      <Router>
-
-        <Nav/>
-
-          <Switch>
-
-            <Route exact path={'/'}>
-              <AboutMe />
-            </Route>
-
-            <Route exact path={'/JZDavidson'}>
-              <JZDavidson />
-            </Route>
-
-            <Route exact path={'/Portfolio'}>
-              <Portfolio projects={projects}/>
-            </Route>
-
-            <Route exact path={'/AboutMe'}>
-              <AboutMe />
-            </Route>
-
-            <Route exact path={'/Resume'}>
-              <Resume />
-            </Route>
-
-            <Route exact path={'/Contact'}>
-              <Contact />
-            </Route>
-
-          </Switch>
-
-        <Footer/>
-
-      </Router>
-
+    <Wrapper>
+      <Title>Friends List</Title>
+      <FriendCard
+        name={friends[0].name}
+        image={friends[0].image}
+        occupation={friends[0].occupation}
+        location={friends[0].location}
+      />
+      <FriendCard
+        name={friends[1].name}
+        image={friends[1].image}
+        occupation={friends[1].occupation}
+        location={friends[1].location}
+      />
+      <FriendCard
+        name={friends[2].name}
+        image={friends[2].image}
+        occupation={friends[2].occupation}
+        location={friends[2].location}
+      />
+    </Wrapper>
   );
 }
 
