@@ -1,8 +1,13 @@
 import React from "react";
-import OmdbContainer from "./components/OmdbContainer";
+import Signup from "./pages/Signup";
+import "./App.css";
 
 function App() {
-  return <OmdbContainer />;
+  return (
+    <div className="App">
+      <Signup />
+    </div>
+  );
 }
 
 export default App;
