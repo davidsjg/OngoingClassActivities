@@ -4,7 +4,7 @@ import "./style.css";
 function Footer() {
   return (
     <footer className="footer">
-      <span>GitHub JobWatcher</span>
+      <span>Wikipedia Searcher</span>
     </footer>
   );
 }
