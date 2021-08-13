@@ -65,7 +65,7 @@ function Search() {
           type="danger"
           style={{ opacity: error ? 1 : 0, marginBottom: 10 }}
         >
-          {this.state.error}
+          {error}
         </Alert>
         <SearchForm handleInputChange={handleInputChange} results={search} />
         <SearchResults title={title} url={url} />
