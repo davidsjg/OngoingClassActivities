@@ -1,6 +1,6 @@
 import React from "react";
-import "./style.css";
 import CardTitleText from "../CardTitleText";
+import "./style.css";
 
 function CardTitle() {
   return (
