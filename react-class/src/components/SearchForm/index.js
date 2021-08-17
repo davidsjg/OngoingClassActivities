@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./style.css";
+import BounceContext from "../../utils/BounceContext";
 
 // Using the datalist element we can create autofill suggestions based on the props.breeds array
-function SearchForm(props) {
+function SearchForm() {
+  const { search, handleInputChange } = useContext(BounceContext);
+
   return (
     <form className="search">
       <div className="form-group">
         <label htmlFor="language">Search Term:</label>
         <input
-          value={props.search}
-          onChange={props.handleInputChange}
+          value={search}
+          onChange={handleInputChange}
           name="term"
           list="term"
           type="text"

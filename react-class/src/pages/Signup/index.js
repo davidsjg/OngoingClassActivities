@@ -7,7 +7,7 @@ function Signup() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log("username is " + username);
     console.log("password is " + password);
@@ -27,7 +27,7 @@ function Signup() {
                 type="text"
                 placeholder="Username"
                 name="username"
-                onChange={e => setUsername(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </Col>
           </Row>
@@ -38,7 +38,7 @@ function Signup() {
                 type="password"
                 placeholder="Password"
                 name="password"
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Col>
           </Row>
@@ -48,7 +48,9 @@ function Signup() {
         </Container>
         <Container className="mt-4">
           <h3>Hello {username}!</h3>
-          <p>I probably shouldn't tell you this, but your password is {password}!</p>
+          <p>
+            I probably shouldn't tell you this, but your password is {password}!
+          </p>
         </Container>
       </form>
     </div>
