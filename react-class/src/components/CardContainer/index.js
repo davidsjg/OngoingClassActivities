@@ -2,10 +2,15 @@ import React from "react";
 import Card from "../Card";
 import "./style.css";
 
-function CardContainer() {
+function CardContainer({ title, image, language, handleBtnClick }) {
   return (
     <div className="jumbotron card-container">
-      <Card />
+      <Card
+        title={title}
+        image={image}
+        language={language}
+        handleBtnClick={handleBtnClick}
+      />
     </div>
   );
 }

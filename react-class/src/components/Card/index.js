@@ -1,30 +1,28 @@
 import React from "react";
+import CardBody from "../CardBody";
 import CardBtn from "../CardBtn";
-import CardTitle from "../CardTitle";
-import CardContext from "../../utils/CardContext";
-
+import CardImg from "../CardImage";
+import CardHeading from "../CardHeading";
 import "./style.css";
 
-function Card() {
+function Card({ title, image, language, handleBtnClick }) {
   return (
-    // The most straightforward solution would be to add the Consumer to the Card component.
-    // This way, all Card components can have the Card context passed directly as props
-    <CardContext.Consumer>
-      {({ image, handleBtnClick }) => (
-        <div
-          className="card"
-          style={{
-            backgroundImage: image ? `url(${image})` : "none"
-          }}
-        >
-          {/* Here, we do not pass the title to demonstrate that it can also be consumed from the CardTitleText component */}
-          <CardTitle />
-          {!image && <i className="fa fa-spinner fa-spin" aria-hidden="true" />}
-          <CardBtn style={{ opacity: image ? 1 : 0 }} onClick={handleBtnClick} data-value="back" />
-          <CardBtn style={{ opacity: image ? 1 : 0 }} onClick={handleBtnClick} data-value="next" />
-        </div>
-      )}
-    </CardContext.Consumer>
+    <div>
+      <CardHeading title={title} />
+      <CardImg image={image} />
+      <CardBody language={language} />
+      {!image && <i className="fa fa-spinner fa-spin" aria-hidden="true" />}
+      <CardBtn
+        style={{ opacity: image ? 1 : 0 }}
+        onClick={handleBtnClick}
+        data-value="back"
+      />
+      <CardBtn
+        style={{ opacity: image ? 1 : 0 }}
+        onClick={handleBtnClick}
+        data-value="next"
+      />
+    </div>
   );
 }
 

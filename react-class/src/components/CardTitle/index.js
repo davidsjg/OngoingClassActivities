@@ -2,10 +2,10 @@ import React from "react";
 import "./style.css";
 import CardTitleText from "../CardTitleText";
 
-function CardTitle() {
+function CardTitle({ title }) {
   return (
-    <div className="heading">
-      <CardTitleText />
+    <div className="blue text-center">
+      <CardTitleText title={title} />
     </div>
   );
 }

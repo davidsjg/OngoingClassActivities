@@ -1,26 +1,30 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Signup from "./pages/Signup";
-import Search from "./pages/Search";
+import Gallery from "./pages/Gallery";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
-import "./App.css";
+import GalleryContext from "./utils/GalleryContext";
 
 function App() {
-  document.title = "Wikipedia Searcher";
+  const [galleryState, setGalleryState] = useState({
+    display: false,
+    theme: "success",
+    onClick: (theme, display) => {
+      // Remember, the setter method on state does not merge like this.setState does
+      // We use the spread operator so that we don't lose our onClick method whenever the state is updated.
+      setGalleryState({ ...galleryState, theme, display });
+    },
+  });
   return (
-    <Router>
-      <div>
+    <div>
+      <GalleryContext.Provider value={galleryState}>
         <Navbar />
         <Wrapper>
-          <Route exact path="/" component={Search} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/search" component={Search} />
+          <Gallery />
         </Wrapper>
         <Footer />
-      </div>
-    </Router>
+      </GalleryContext.Provider>
+    </div>
   );
 }
 
