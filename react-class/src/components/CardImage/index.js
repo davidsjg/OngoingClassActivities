@@ -1,11 +1,16 @@
 import React from "react";
+import UserContext from "../../utils/userContext";
 
-function CardImg({ image }) {
+function CardImg() {
   return (
-    <div>
-      <img className="card-img" src={image} alt="user thumbnail" />
-      {!image && <i className="fa fa-spinner fa-spin" aria-hidden="true" />}
-    </div>
+    <UserContext.Consumer>
+      {({user}) => (
+        <div>
+          <img className="card-img" src={user.image} alt="user thumbnail" />
+          {!user.image && <i className="fa fa-spinner fa-spin" aria-hidden="true" />}
+        </div>
+      )}
+    </UserContext.Consumer>
   );
 }
 
